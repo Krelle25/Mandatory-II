@@ -14,6 +14,7 @@
     "vite": "^8.0.4"
   },
   "dependencies": {
-    "svelte-5-french-toast": "^2.0.6"
+    "svelte-5-french-toast": "^2.0.6",
+    "svelte-routing": "^2.13.0"
   }
 }
