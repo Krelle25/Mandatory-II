@@ -35,6 +35,7 @@
 				<DashboardPage />
 			</PrivateRoute>
 		</Route>
+		
 		<Route path="/">
 			<LoginPage />
 		</Route>
