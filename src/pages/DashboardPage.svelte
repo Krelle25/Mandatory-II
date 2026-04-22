@@ -42,93 +42,90 @@
 			loadingUsers = false;
 		}
 	}
-
-	function getInitials(email) {
-		if (!email) return 'U';
-		return email.slice(0, 2).toUpperCase();
-	}
 </script>
 
-<div class="container">
-	<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-		<div>
-			<h1>Dashboard</h1>
-			<p class="muted">You are logged in</p>
-		</div>
+<main class="container">
+	<nav>
+		<ul>
+			<li>
+				<strong>Dashboard</strong>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<button class="secondary" on:click={handleLogout}>Logout</button>
+			</li>
+		</ul>
+	</nav>
 
-		<button class="btn btn-primary" onclick={handleLogout}>
-			Logout
-		</button>
+	<header>
+		<h1>Welcome, {$currentUser?.username}</h1>
+		<p>You are logged in and your session is active.</p>
+	</header>
+
+	<div class="dashboard-grid">
+		<article>
+			<h2>User info</h2>
+			<p><strong>Username:</strong> {$currentUser?.username}</p>
+			<p><strong>Email:</strong> {$currentUser?.email}</p>
+			<p><strong>Role:</strong> {$currentUser?.role}</p>
+		</article>
+
+		<article>
+			<h2>Status</h2>
+			<p><strong>Session:</strong> Active</p>
+			<p><strong>Authentication:</strong> OK</p>
+		</article>
 	</div>
 
-	<div class="grid grid-2">
-		<div class="card">
-			<h3>User info</h3>
-
-			<div class="row">
-				<span class="muted">Username</span>
-				<span>{$currentUser?.username}</span>
-			</div>
-
-			<div class="row">
-				<span class="muted">Email</span>
-				<span>{$currentUser?.email}</span>
-			</div>
-
-			<div class="row">
-				<span class="muted">Role</span>
-				<span>{$currentUser?.role}</span>
-			</div>
-		</div>
-
-		<div class="card">
-			<h3>Status</h3>
-
-			<div class="row">
-				<span class="muted">Session</span>
-				<span>Active</span>
-			</div>
-
-			<div class="row">
-				<span class="muted">Auth</span>
-				<span style="color: var(--success)">OK</span>
-			</div>
-		</div>
-
-		{#if $currentUser?.role === 'admin'}
-			<div class="card" style="grid-column: span 2;">
-				<h3>Admin</h3>
-
-				<div style="margin: 1rem 0;">
-					<button class="btn btn-secondary" onclick={handleViewUsers}>
-						{showUsers ? 'Hide users' : 'View users'}
+	{#if $currentUser?.role === 'admin'}
+		<article>
+			<header>
+				<h2>Admin panel</h2>
+				<p>Manage and review registered users.</p>
+				
+				<div style="margin-top: 1rem;">
+					<button on:click={handleViewUsers} aria-busy={loadingUsers}>
+						{showUsers ? 'Hide users' : loadingUsers ? 'Loading...' : 'View users'}
 					</button>
 				</div>
+			</header>
 
-				{#if showUsers}
-					<table class="table">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Role</th>
-							</tr>
-						</thead>
+			{#if showUsers}
 
-						<tbody>
-							{#each users as user}
-								<tr>
-									<td>{user.id}</td>
-									<td>{user.username}</td>
-									<td>{user.email}</td>
-									<td>{user.role}</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
-				{/if}
-			</div>
+			<figure style="margin-top: 1.5rem;">
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{#each users as user}
+						<tr>
+							<td>{user.id}</td>
+							<td>{user.username}</td>
+							<td>{user.email}</td>
+							<td>{user.role}</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</figure>
 		{/if}
-	</div>
-</div>
+	</article>
+	{/if}
+</main>
+
+<style>
+	.dashboard-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+</style>

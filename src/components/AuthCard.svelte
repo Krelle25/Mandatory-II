@@ -17,7 +17,6 @@
 	}
 
 	async function handleLogin() {
-
 		try {
 			const data = await login(loginEmail, loginPassword);
 			currentUser.set(data.user);
@@ -35,7 +34,6 @@
 	}
 
 	async function handleRegister() {
-
 		try {
 			const data = await register(signupUsername, signupEmail, signupPassword);
 
@@ -59,76 +57,136 @@
 <div class="auth-page">
 	<div class="flip-card">
 		<div class:flipped={isFlipped} class="flip-card-inner">
-			<div class="flip-card-face auth-card">
-				<h1>Login</h1>
-				<p class="subtitle">Sign in to your account</p>
+			<section class="flip-card-face">
+				<article>
+					<h1>Login</h1>
+					<p>Sign in to your account</p>
 
-				<label for="login-email">Email</label>
-				<input
-					id="login-email"
-					class="input"
-					type="text"
-					placeholder="Email"
-					bind:value={loginEmail}
-				/>
+					<form on:submit|preventDefault={handleLogin}>
+						<label for="login-email">Email</label>
+						<input
+							id="login-email"
+							type="email"
+							placeholder="Email"
+							bind:value={loginEmail}
+							required
+						/>
 
-				<label for="login-password">Password</label>
-				<input
-					id="login-password"
-					class="input"
-					type="password"
-					placeholder="Password"
-					bind:value={loginPassword}
-				/>
+						<label for="login-password">Password</label>
+						<input
+							id="login-password"
+							type="password"
+							placeholder="Password"
+							bind:value={loginPassword}
+							required
+						/>
 
-				<button class="primary-btn" type="button" onclick={handleLogin}>
-					Login
-				</button>
+						<button type="submit">Login</button>
+					</form>
 
-				<button class="link-btn" type="button" onclick={flipCard}>
-					Create an account
-				</button>
-			</div>
+					<footer class="auth-footer">
+						<button class="secondary outline" type="button" on:click={flipCard}>
+							Create an account
+						</button>
+					</footer>
+				</article>
+			</section>
 
-			<div class="flip-card-face flip-card-back auth-card">
-				<h1>Sign up</h1>
-				<p class="subtitle">Create a new account</p>
+			<section class="flip-card-face flip-card-back">
+				<article>
+					<h1>Sign up</h1>
+					<p>Create a new account</p>
 
-				<label for="signup-username">Username</label>
-				<input
-					id="signup-username"
-					class="input"
-					type="text"
-					placeholder="Username"
-					bind:value={signupUsername}
-				/>
+					<form on:submit|preventDefault={handleRegister}>
+						<label for="signup-username">Username</label>
+						<input
+							id="signup-username"
+							type="text"
+							placeholder="Username"
+							bind:value={signupUsername}
+							required
+						/>
 
-				<label for="signup-email">Email</label>
-				<input
-					id="signup-email"
-					class="input"
-					type="text"
-					placeholder="Email"
-					bind:value={signupEmail}
-				/>
+						<label for="signup-email">Email</label>
+						<input
+							id="signup-email"
+							type="email"
+							placeholder="Email"
+							bind:value={signupEmail}
+							required
+						/>
 
-				<label for="signup-password">Password</label>
-				<input
-					id="signup-password"
-					class="input"
-					type="password"
-					placeholder="Password"
-					bind:value={signupPassword}
-				/>
+						<label for="signup-password">Password</label>
+						<input
+							id="signup-password"
+							type="password"
+							placeholder="Password"
+							bind:value={signupPassword}
+							required
+						/>
 
-				<button class="primary-btn" type="button" onclick={handleRegister}>
-					Create account
-				</button>
+						<button type="submit">Create account</button>
+					</form>
 
-				<button class="link-btn" type="button" onclick={flipCard}>
-					Back to login
-				</button>
-			</div>
+					<footer class="auth-footer">
+						<button class="secondary outline" type="button" on:click={flipCard}>
+							Back to login
+						</button>
+					</footer>
+				</article>
+			</section>
 		</div>
 	</div>
 </div>
+
+<style>
+	.auth-page {
+		min-height: 100vh;
+		display: grid;
+		place-items: center;
+		padding: 2rem;
+	}
+
+	.flip-card {
+		perspective: 1200px;
+		width: 100%;
+		max-width: 500px;
+	}
+
+	.flip-card-inner {
+		position: relative;
+		width: 100%;
+		transform-style: preserve-3d;
+		transition: transform 0.7s ease;
+	}
+
+	.flip-card-inner.flipped {
+		transform: rotateY(180deg);
+	}
+
+	.flip-card-face {
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		grid-area: 1 / 1;
+	}
+
+	.flip-card {
+		display: grid;
+	}
+
+	.flip-card-inner {
+		display: grid;
+	}
+
+	.flip-card-face > article {
+		margin: 0;
+	}
+
+	.flip-card-back {
+		transform: rotateY(180deg);
+	}
+
+	.auth-footer {
+		margin-top: 1rem;
+	}
+</style>
