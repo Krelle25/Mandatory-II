@@ -23,8 +23,17 @@
 	}
 
 	async function handleViewUsers() {
+		if (loadingUsers) {
+			return;
+		}
+
 		if (showUsers) {
 			showUsers = false;
+			return;
+		}
+
+		if (users.length > 0) {
+			showUsers = true;
 			return;
 		}
 

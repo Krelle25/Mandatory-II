@@ -8,7 +8,9 @@ async function parseResponse(res) {
 	}
 
 	const text = await res.text();
-	return { message: text || 'Unexpected server response' };
+	return {
+		message: text || 'Unexpected server response' 
+	};
 }
 
 export async function login(email, password) {
@@ -79,16 +81,16 @@ export async function logout() {
 }
 
 export async function getAllUsers() {
-    const response = await fetch(`${BASE_URL}/auth/users`, {
-        method: 'GET',
-        credentials: 'include'
-    });
+	const res = await fetch(`${BASE_URL}/auth/users`, {
+		method: 'GET',
+		credentials: 'include'
+	});
 
-    const data = await response.json();
+	const data = await parseResponse(res);
 
-    if (!response.ok) {
-        throw new Error(data.message || 'Could not fetch users');
-    }
+	if (!res.ok) {
+		throw new Error(data.message || 'Could not fetch users');
+	}
 
-    return data;
+	return data;
 }
