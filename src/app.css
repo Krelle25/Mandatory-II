@@ -1,51 +1,59 @@
-.auth-page {
-	min-height: 100vh;
-	display: grid;
-	place-items: center;
-	padding: 1rem;
-}
+	.auth-page {
+		min-height: 100vh;
+		display: grid;
+		place-items: center;
+		padding: 1rem;
+	}
 
-.flip-card {
-	width: 100%;
-	max-width: 420px;
-	perspective: 1000px;
-}
+	.flip-card {
+		width: 100%;
+		max-width: 420px;
+		perspective: 1000px;
+	}
 
-.flip-card-inner {
-	position: relative;
-	width: 100%;
-	min-height: 520px;
-	transform-style: preserve-3d;
-	transition: transform 0.5s ease;
-}
+	.flip-card-inner {
+		position: relative;
+		width: 100%;
+		min-height: 520px;
+		transform-style: preserve-3d;
+		transition: transform 0.5s ease;
+	}
 
-.flip-card-inner.flipped {
-	transform: rotateY(180deg);
-}
+	.flip-card-inner.flipped {
+		transform: rotateY(180deg);
+	}
 
-.flip-card-face {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
+	.flip-card-face {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
 
-.flip-card-back {
-	transform: rotateY(180deg);
-}
+	.flip-card-back {
+		transform: rotateY(180deg);
+	}
 
-.flip-card-face > article {
-	margin: 0;
-}
+	.flip-card-face > article {
+		margin: 0;
+	}
 
-.auth-footer {
-	margin-top: 1rem;
-}
+	.auth-footer {
+		margin-top: 1rem;
+	}
 
-.dashboard-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 1rem;
-	margin-bottom: 1rem;
-}
+	.dashboard-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.admin-actions {
+		margin-top: 1rem;
+	}
+
+	.admin-table {
+		margin-top: 1.5rem;
+	}

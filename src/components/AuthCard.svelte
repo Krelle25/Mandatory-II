@@ -52,6 +52,16 @@
 			toast.error(error.message || 'Signup failed');
 		}
 	}
+
+	async function handleLoginSubmit(event) {
+		event.preventDefault();
+		await handleLogin();
+	}
+
+	async function handleRegisterSubmit(event) {
+		event.preventDefault();
+		await handleRegister();
+	}
 </script>
 
 <div class="auth-page">
@@ -62,7 +72,7 @@
 					<h1>Login</h1>
 					<p>Sign in to your account</p>
 
-					<form on:submit|preventDefault={handleLogin}>
+					<form onsubmit={handleLoginSubmit}>
 						<label for="login-email">Email</label>
 						<input
 							id="login-email"
@@ -85,7 +95,7 @@
 					</form>
 
 					<footer class="auth-footer">
-						<button class="secondary outline" type="button" on:click={flipCard}>
+						<button class="secondary outline" type="button" onclick={flipCard}>
 							Create an account
 						</button>
 					</footer>
@@ -97,7 +107,7 @@
 					<h1>Sign up</h1>
 					<p>Create a new account</p>
 
-					<form on:submit|preventDefault={handleRegister}>
+					<form onsubmit={handleRegisterSubmit}>
 						<label for="signup-username">Username</label>
 						<input
 							id="signup-username"
@@ -129,7 +139,7 @@
 					</form>
 
 					<footer class="auth-footer">
-						<button class="secondary outline" type="button" on:click={flipCard}>
+						<button class="secondary outline" type="button" onclick={flipCard}>
 							Back to login
 						</button>
 					</footer>
@@ -138,55 +148,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.auth-page {
-		min-height: 100vh;
-		display: grid;
-		place-items: center;
-		padding: 2rem;
-	}
-
-	.flip-card {
-		perspective: 1200px;
-		width: 100%;
-		max-width: 500px;
-	}
-
-	.flip-card-inner {
-		position: relative;
-		width: 100%;
-		transform-style: preserve-3d;
-		transition: transform 0.7s ease;
-	}
-
-	.flip-card-inner.flipped {
-		transform: rotateY(180deg);
-	}
-
-	.flip-card-face {
-		backface-visibility: hidden;
-		-webkit-backface-visibility: hidden;
-		grid-area: 1 / 1;
-	}
-
-	.flip-card {
-		display: grid;
-	}
-
-	.flip-card-inner {
-		display: grid;
-	}
-
-	.flip-card-face > article {
-		margin: 0;
-	}
-
-	.flip-card-back {
-		transform: rotateY(180deg);
-	}
-
-	.auth-footer {
-		margin-top: 1rem;
-	}
-</style>

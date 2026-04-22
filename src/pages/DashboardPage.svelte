@@ -53,7 +53,7 @@
 		</ul>
 		<ul>
 			<li>
-				<button class="secondary" on:click={handleLogout}>Logout</button>
+				<button class="secondary" onclick={handleLogout}>Logout</button>
 			</li>
 		</ul>
 	</nav>
@@ -83,9 +83,9 @@
 			<header>
 				<h2>Admin panel</h2>
 				<p>Manage and review registered users.</p>
-				
-				<div style="margin-top: 1rem;">
-					<button on:click={handleViewUsers} aria-busy={loadingUsers}>
+
+				<div class="admin-actions">
+					<button onclick={handleViewUsers} aria-busy={loadingUsers}>
 						{showUsers ? 'Hide users' : loadingUsers ? 'Loading...' : 'View users'}
 					</button>
 				</div>
@@ -93,7 +93,7 @@
 
 			{#if showUsers}
 
-			<figure style="margin-top: 1.5rem;">
+			<figure class="admin-table">
 				<table>
 					<thead>
 						<tr>
@@ -120,12 +120,3 @@
 	</article>
 	{/if}
 </main>
-
-<style>
-	.dashboard-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1rem;
-		margin-bottom: 1rem;
-	}
-</style>
